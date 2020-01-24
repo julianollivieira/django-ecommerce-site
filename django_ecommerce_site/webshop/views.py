@@ -6,6 +6,9 @@ from django.http import HttpResponse
 def home(request):
     return render(request, 'webshop/home.html')
 
+def productdetails(request, product_id):
+    return render(request, 'webshop/productdetails.html', {'product_id': product_id})
+
 def login(request):
     return render(request, 'webshop/login.html')
 

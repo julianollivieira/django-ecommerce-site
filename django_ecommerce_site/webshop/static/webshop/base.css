@@ -1,0 +1,47 @@
+body {
+    padding-top: 70px;
+    background-color: #F5F5F5;
+}
+.navbar-img {
+    margin-right: 10px;
+}
+.navbar-img path {
+    fill: #FFFFFF;
+}
+
+.zoekbalk {
+    width: 40em;
+    margin: 0 auto;
+}
+
+.card {
+    margin-top: 10px;
+}
+
+.card-img-top {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.card-body {
+    height: 12em;
+}
+
+.card-footer a {
+    float: right;
+}
+
+.prijskaartje {
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.oud_prijskaartje {
+    float: left;
+    font-size: 1em;
+    margin-left: 0.5em;
+    text-decoration: line-through;
+}
