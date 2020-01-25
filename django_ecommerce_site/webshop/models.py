@@ -1,6 +1,16 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
+
+class Product(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.TextField()
+    price = models.FloatField()
+    old_price = models.FloatField()
+    image = models.CharField(max_length=256)
+    date_added = models.DateTimeField(default=timezone.now)
+
 class User(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=32)

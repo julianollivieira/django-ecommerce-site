@@ -11,52 +11,25 @@
   </div>
 
   <!-- Grid of products -->
-  {% for i in '123'|make_list %}
   <div class="row">
+    {% for product in products %}
     <div class="col-sm">
       <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="https://s.s-bol.com/imgbase0/imagebase3/large/FC/3/1/3/0/9200000108200313.jpg" alt="Card image cap">
+        <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title"><a href="product/1">Apple iPad Air (2019) Wifi 64GB Spacegrijs</a></h5>
-          <p class="card-text">Beeldschermresolutie: Retina<br>Resolutie: 2224 x 1668<br>Beeldschermdiagonaal: 10.5 inch</p>
+          <h5 class="card-title"><a href="product/1">{{ product.title }}</a></h5>
+          <p class="card-text">{{ product.description }}</p>
         </div>
         <div class="card-footer">
-          <p class="prijskaartje">522.-</p>
-          <!-- <p class="oud_prijskaartje text-danger">1600.-</p> -->
+          <p class="prijskaartje">{{ product.price}}.-</p>
+          <p class="oud_prijskaartje text-danger">{{ product.old_price}}.-</p>
           <a href="product/1/order" class="btn btn-primary">Bestel Nu</a>
         </div>
       </div>
     </div>
-    <div class="col-sm">
-      <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-xr-black-select-201809?wid=441&hei=529&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1551226038992" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a href="product/2">Apple iPhone Xr 64GB Zwart</a></h5>
-          <p class="card-text">Besturingssysteem: iOS 13<br>Geheugencapaciteit: 64 GB<br>Specificaties camera: 12 megapixel</p>
-        </div>
-        <div class="card-footer">
-          <p class="prijskaartje">688.-</p>
-          <!-- <p class="oud_prijskaartje text-danger">1600.-</p> -->
-          <a href="product/2/order" class="btn btn-primary">Bestel Nu</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm">
-      <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="https://www.amac.nl/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/p/apple_macbook_air_2019_1_1.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a href="product/1">Apple MacBook Air (2019) 128GB Spacegrijs</a></h5>
-          <p class="card-text">Processor: 1.6 GHz dual-core<br>Werkgeheugen: 8 GB<br>Grafische kaart: UHD Graphics 617</p>
-        </div>
-        <div class="card-footer">
-          <p class="prijskaartje">1379.-</p>
-          <p class="oud_prijskaartje text-danger">1600.-</p>
-          <a href="product/3/order" class="btn btn-primary">Bestel Nu</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-  
+
+
 </div>
 {% endblock %}
