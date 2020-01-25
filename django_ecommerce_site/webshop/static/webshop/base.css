@@ -1,47 +1,51 @@
+/* Misc */
 body {
     padding-top: 70px;
     background-color: #F5F5F5;
 }
+
+/* Navigation bar */
 .navbar-img {
     margin-right: 10px;
 }
 .navbar-img path {
     fill: #FFFFFF;
 }
+.navbar .category-select {
+    max-width: 20em;
+}
 
-.zoekbalk {
+/* Product grid page */
+.product-grid-page .zoekbalk {
     width: 40em;
     margin: 0 auto;
 }
-
-.card {
+.product-grid-page .card {
     margin-top: 10px;
 }
-
-.card-img-top {
+.product-grid-page .card-img-top {
     width: 200px;
     height: 200px;
     margin: 0 auto;
 }
-
-.card-body {
+.product-grid-page .card-body {
     height: 12em;
 }
-
-.card-footer a {
+.product-grid-page .card-footer a {
     float: right;
 }
-
-.prijskaartje {
+.product-grid-page .prijskaartje {
     float: left;
     font-size: 1.5em;
     font-weight: bold;
     margin: 0;
 }
-
-.oud_prijskaartje {
+.product-grid-page .oud_prijskaartje {
     float: left;
     font-size: 1em;
     margin-left: 0.5em;
     text-decoration: line-through;
+}
+.product-grid-page {
+    margin-bottom: 50px;
 }
