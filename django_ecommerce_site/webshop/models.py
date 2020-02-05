@@ -6,10 +6,11 @@ from django.utils import timezone
 class Product(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     old_price = models.FloatField()
     image = models.CharField(max_length=256)
     date_added = models.DateTimeField(default=timezone.now)
+    stock = models.IntegerField()
 
 class User(models.Model):
     email = models.EmailField()
