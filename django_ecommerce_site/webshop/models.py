@@ -9,8 +9,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     old_price = models.FloatField()
     image = models.CharField(max_length=256)
+    stock = models.IntegerField(null=True)
     date_added = models.DateTimeField(default=timezone.now)
-    stock = models.IntegerField()
 
 class User(models.Model):
     email = models.EmailField()

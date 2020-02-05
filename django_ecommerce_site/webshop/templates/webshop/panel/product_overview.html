@@ -46,7 +46,7 @@
                 <td class="align-middle">{{ product.stock }}</td>
                 <td class="align-middle">
                     <a href="#" class="badge badge-secondary p-1"><i class="fas fa-edit"></i> Edit</a>
-                    <a href="#" class="badge badge-danger p-1"><i class="fas fa-trash"></i> Delete</a>
+                    <a href="/panel/products/{{product.id}}/delete" class="badge badge-danger p-1"><i class="fas fa-trash"></i> Delete</a>
                 </td>
             </tr>
         {% endfor %}

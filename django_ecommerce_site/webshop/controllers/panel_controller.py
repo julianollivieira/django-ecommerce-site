@@ -11,7 +11,8 @@ def main(request):
 def users(request):
     query = request.GET.get("query", "")
     field = request.GET.get("field", "")
-
+    alert_message = request.GET.get("message", "")
+    
     if(query == ""):
         users = User.objects.all()
     else:
@@ -28,7 +29,8 @@ def users(request):
 
     return render(request, 'webshop/panel/user_overview.html', {
         'users': users, 
-        'query': query, 
+        'query': query,
+        'alert_message': alert_message, 
         'fields': [
             {'field': 'Email', 'value': True if field == "email" else False},
             {'field': 'Gender', 'value': True if field == "gender" else False},
@@ -40,6 +42,7 @@ def users(request):
 def products(request):
     query = request.GET.get("query", "")
     field = request.GET.get("field", "")
+    alert_message = request.GET.get("message", "")
 
     if(query == ""):
         products = Product.objects.all()
@@ -53,7 +56,8 @@ def products(request):
 
     return render(request, 'webshop/panel/product_overview.html', {
         'products': products, 
-        'query': query, 
+        'query': query,
+        'alert_message': alert_message, 
         'fields': [
             {'field': 'Title', 'value': True if field == "title" else False},
             {'field': 'Description', 'value': True if field == "description" else False}
@@ -61,34 +65,40 @@ def products(request):
     })
 
 # Delete
-def delete_user(request):
-    # Delete users here
+def delete_user(request, user_id):
+    User.objects.filter(id=user_id).delete()
     message = "User deleted succesfully!"
-    return redirect('/panel/users/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
 
-def delete_product(request):
-    # Delete users here
+def delete_product(request, product_id):
+    Product.objects.filter(id=product_id).delete()
     message = "Product deleted succesfully!"
-    return redirect('/panel/products/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
+
+
+
+
+
+
 
 # Add
 def add_user(request):
     # Add users here
     message = "User added succesfully!"
-    return redirect('/panel/users/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
 
 def add_product(request):
     # Add products here
     message = "Product added succesfully!"
-    return redirect('/panel/products/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
 
 # Add
 def edit_user(request):
     # Edit users here
     message = "User edited succesfully!"
-    return redirect('/panel/users/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
 
 def edit_product(request):
     # Edit products here
     message = "Product edited succesfully!"
-    return redirect('/panel/products/?message=' + message) # Add color? info/warning/danger
+    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
