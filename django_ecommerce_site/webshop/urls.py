@@ -8,7 +8,8 @@ urlpatterns = [
     path('', misc.home, name='webshop-home'),
 
     path('panel/<str:category>', panel.overview, name='webshop-panel-overview'),
-    path('panel/<str:category>/delete/<int:id>', panel.delete, name='webshop-panel-overview'),
+    path('panel/<str:category>/delete/<int:id>', panel.delete, name='webshop-panel-delete'),
+    path('panel/<str:category>/edit/<int:id>', panel.edit, name="webshop-panel-edit")
 
 
     # path('product/<int:product_id>', misc.product, name='webshop-product'),

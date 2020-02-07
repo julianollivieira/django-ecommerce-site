@@ -12,6 +12,8 @@ class Products:
         return Product._meta.get_fields()
     def deleteWithId(self, _id):
         return Product.objects.filter(id=_id).delete()
+    def getFirstWithId(self, _id):
+        return Product.objects.filter(id=_id)[0]
 
 class Users:
     def getAll(self):
@@ -22,6 +24,8 @@ class Users:
         return User._meta.get_fields()
     def deleteWithId(self, _id):
         return User.objects.filter(id=_id).delete()
+    def getFirstWithId(self, _id):
+        return User.objects.filter(id=_id)[0]
 
 categories = {
     'products': Products(),
@@ -46,3 +50,11 @@ def overview(request, category):
 def delete(request, category, id):
     categories[category].deleteWithId(id)
     return redirect('/panel/'+category)
+
+def edit(request, category, id):
+
+    return render(request, 'webshop/panel/edit.html', {
+        'category': category,
+        'fields': categories[category].getFields(),
+        'item': categories[category].getFirstWithId(id)
+    })
