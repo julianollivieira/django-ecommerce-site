@@ -3,13 +3,22 @@
 <div class="container product-grid-page">
 
     <div class="btn-group float-left" role="group" aria-label="Basic example">
-        <a href="/panel/users" class="btn btn-secondary text-light">Users</a>
-        <a href="/panel/products" class="btn btn-secondary text-light">Products</a>
+        {% if category == "users"%}
+            <a href="/panel/users" class="btn btn-info text-light">Users</a>
+            <a href="/panel/products" class="btn btn-outline-info text-dark">Products</a>
+        {% elif category == "products" %}
+            <a href="/panel/users" class="btn btn-outline-info text-dark">Users</a>
+            <a href="/panel/products" class="btn btn-info text-light">Products</a>
+        {% else %}
+            <a href="/panel/users" class="btn btn-outline-info text-dark">Users</a>
+            <a href="/panel/products" class="btn btn-outline-info text-dark">Products</a>
+        {% endif%}
+        
     </div>
 
     <div class="btn-group float-right" role="group" aria-label="Basic example">
-        <a href="/panel/{{category}}" class="btn btn-secondary text-light">Clear Search</a>
-        <a class="btn btn-secondary text-light">Setting 2</a>
+        <a href="/panel/{{category}}" class="btn btn-danger text-light">Clear Search <i class="fas fa-trash-alt"></i></a>
+        <a class="btn btn-success text-light">New <i class="fas fa-plus"></i></a>
     </div>
 
     <!-- Search bar -->
@@ -34,11 +43,12 @@
     </form>
     
     <!-- Table TODO: 1 letter in field to uppercase and swap _ for ' ' -->
-    <table class="table">
+    <table class="table" style="position: absolute; left: 0;">
         <tr style="font-size: 0.7em;">
             {% for field in fields %}
                 <th scope="col">{{ field.name }}</th>
             {% endfor %}
+            <th scope="col">Options</th>
         </tr>
         {% for item in items %}
             <tr style="font-size: 0.7em;">
