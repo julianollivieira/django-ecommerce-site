@@ -1,55 +1,42 @@
-{% extends 'webshop/base.html' %}
+{% extends "webshop/base.html" %}
 {% block content %}
 <div class="container product-grid-page">
 
-  <!-- Search bar here -->
-  <div class="input-group zoekbalk">
-    <input type="text" class="form-control" placeholder="Waar ben je naar op zoek?">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
-    </div>
-  </div>
-
-  {% for product in products %}
-    {% if forloop.first %}<div class="row">{% endif %}
-    <div class="col-sm">
-      <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a href="product/1">{{ product.title }}</a></h5>
-          <p class="card-text">{{ product.description }}</p>
+    <!-- Search bar -->
+    <div class="input-group zoekbalk">
+        <input type="text" class="form-control" placeholder="Waar ben je naar op zoek?">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
         </div>
-        <div class="card-footer">
-          <p class="prijskaartje">{{ product.price}}.-</p>
-          <p class="oud_prijskaartje text-danger">{{ product.old_price}}.-</p>
-          <a href="product/1/order" class="btn btn-primary">Bestel Nu</a>
-        </div>
-      </div>
     </div>
-    {% if forloop.counter|divisibleby:3 %}</div><div class="col-sm">{% endif %}
-    {% if forloop.last %}</div>{% endif %}
-  {% endfor %}
 
-  <!-- Grid of products -->
-  <!-- <div class="row">
+    <!-- Producten -->
     {% for product in products %}
-    <div class="col-sm">
-      <div class="card" style="width: 100%;">
-        <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><a href="product/1">{{ product.title }}</a></h5>
-          <p class="card-text">{{ product.description }}</p>
-        </div>
-        <div class="card-footer">
-          <p class="prijskaartje">{{ product.price}}.-</p>
-          <p class="oud_prijskaartje text-danger">{{ product.old_price}}.-</p>
-          <a href="product/1/order" class="btn btn-primary">Bestel Nu</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div> -->
+        {% if loop.first %}
+            <div class="row">
+        {% endif %}
 
+        <div class="col-sm">
+            <div class="card" style="width: 100%;">
+              <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><a href="product/1">{{ product.title }}</a></h5>
+                <p class="card-text">{{ product.description }}</p>
+              </div>
+              <div class="card-footer">
+                <p class="prijskaartje">{{ product.price}}.-</p>
+                <p class="oud_prijskaartje text-danger">{{ product.old_price}}.-</p>
+                <a href="product/1/order" class="btn btn-primary">Bestel Nu</a>
+              </div>
+            </div>
+          </div>
+          {% if loop.index is divisibleby(3) %}
+            </div><div class="col-sm">
+          {% endif %}
+          {% if loop.last %}
+            </div>
+          {% endif %}
+    {% endfor %}
 
 </div>
 {% endblock %}

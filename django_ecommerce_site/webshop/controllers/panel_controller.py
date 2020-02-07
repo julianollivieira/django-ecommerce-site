@@ -2,103 +2,47 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ..models import Product, User
 
-# Panel
-def main(request):
-    return render(request, 'webshop/panel/panel.html')
+# Classes for model specific methods
+class Products:
+    def getAll(self):
+        return Product.objects.all()
+    def getSearch(self, search_field, search_query):
+        return Product.objects.raw('SELECT * FROM webshop_product WHERE '+search_field+' LIKE "%'+search_query+'%"')
+    def getFields(self):
+        return Product._meta.get_fields()
+    def deleteWithId(self, _id):
+        return Product.objects.filter(id=_id).delete()
 
+class Users:
+    def getAll(self):
+        return User.objects.all()
+    def getSearch(self, search_field, search_query):
+        return User.objects.raw('SELECT * FROM webshop_user WHERE '+search_field+' LIKE "%'+search_query+'%"')
+    def getFields(self  ):
+        return User._meta.get_fields()
+    def deleteWithId(self, _id):
+        return User.objects.filter(id=_id).delete()
 
-# Overview
-def users(request):
-    query = request.GET.get("query", "")
-    field = request.GET.get("field", "")
-    alert_message = request.GET.get("message", "")
-    
-    if(query == ""):
-        users = User.objects.all()
-    else:
-        if(field == "email"):
-            users = User.objects.filter(email__contains = query)
-        elif(field == "gender"):
-            users = User.objects.filter(gender__contains = query)
-        elif(field == "first name"):
-            users = User.objects.filter(first_name__contains = query)
-        elif(field == "last name"):
-            users = User.objects.filter(last_name__contains = query)
-        else:
-            users = User.objects.all()
+categories = {
+    'products': Products(),
+    'users': Users(),
+}
 
-    return render(request, 'webshop/panel/user_overview.html', {
-        'users': users, 
-        'query': query,
-        'alert_message': alert_message, 
-        'fields': [
-            {'field': 'Email', 'value': True if field == "email" else False},
-            {'field': 'Gender', 'value': True if field == "gender" else False},
-            {'field': 'First Name', 'value': True if field == "first name" else False},
-            {'field': 'Last Name', 'value': True if field == "last name" else False}
-        ]
+def overview(request, category):
+    search_query = request.GET.get("query", "")
+    search_field = request.GET.get("field", "") 
+    cat = categories[category]
+
+    items = cat.getAll() if search_query == "" else cat.getSearch(search_field, search_query)
+
+    return render(request, 'webshop/panel/overview.html', {
+        'category': category,
+        'fields': cat.getFields(),
+        'items': items,
+        'search_query': search_query,
+        'search_field': search_field,
     })
 
-def products(request):
-    query = request.GET.get("query", "")
-    field = request.GET.get("field", "")
-    alert_message = request.GET.get("message", "")
-
-    if(query == ""):
-        products = Product.objects.all()
-    else:
-        if(field == "title"):
-            products = Product.objects.filter(title__contains = query)
-        elif(field == "description"):
-            products = Product.objects.filter(description__contains = query)
-        else:
-            products = Product.objects.all()
-
-    return render(request, 'webshop/panel/product_overview.html', {
-        'products': products, 
-        'query': query,
-        'alert_message': alert_message, 
-        'fields': [
-            {'field': 'Title', 'value': True if field == "title" else False},
-            {'field': 'Description', 'value': True if field == "description" else False}
-        ]
-    })
-
-# Delete
-def delete_user(request, user_id):
-    User.objects.filter(id=user_id).delete()
-    message = "User deleted succesfully!"
-    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
-
-def delete_product(request, product_id):
-    Product.objects.filter(id=product_id).delete()
-    message = "Product deleted succesfully!"
-    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
-
-
-
-
-
-
-
-# Add
-def add_user(request):
-    # Add users here
-    message = "User added succesfully!"
-    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
-
-def add_product(request):
-    # Add products here
-    message = "Product added succesfully!"
-    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
-
-# Add
-def edit_user(request):
-    # Edit users here
-    message = "User edited succesfully!"
-    return redirect('/panel/users?message=' + message) # Add color? info/warning/danger
-
-def edit_product(request):
-    # Edit products here
-    message = "Product edited succesfully!"
-    return redirect('/panel/products?message=' + message) # Add color? info/warning/danger
+def delete(request, category, id):
+    categories[category].deleteWithId(id)
+    return redirect('/panel/'+category)

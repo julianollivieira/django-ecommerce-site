@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -32,7 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'webshop.apps.WebshopConfig',
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,10 +51,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_ecommerce_site.urls'
 
+# print(os.path.join(BASE_DIR, 'templates'))
+
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [os.path.join(BASE_DIR, os.path.join('webshop', 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

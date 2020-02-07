@@ -1,0 +1,62 @@
+{% extends 'webshop/base.html' %}
+{% block content %}
+<div class="container product-grid-page">
+
+    <div class="btn-group float-left" role="group" aria-label="Basic example">
+        <a href="/panel/users" class="btn btn-secondary text-light">Users</a>
+        <a href="/panel/products" class="btn btn-secondary text-light">Products</a>
+    </div>
+
+    <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <a href="/panel/{{category}}" class="btn btn-secondary text-light">Clear Search</a>
+        <a class="btn btn-secondary text-light">Setting 2</a>
+    </div>
+
+    <!-- Search bar -->
+    <form action="/panel/{{category}}" method="GET">
+        <div class="input-group zoekbalk pb-3">
+            <div class="input-group-prepend">
+                <select name="field" class="custom-select">
+                    {% for field in fields %}
+                        {% if search_field == field.name %}
+                            <option value="{{field.name}}" selected>{{field.name}}</option>
+                        {% else %}
+                            <option value="{{field.name}}">{{field.name}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <input name="query" type="text" class="form-control" placeholder="Waar ben je naar op zoek?" value="{{search_query}}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+    
+    <!-- Table TODO: 1 letter in field to uppercase and swap _ for ' ' -->
+    <table class="table">
+        <tr style="font-size: 0.7em;">
+            {% for field in fields %}
+                <th scope="col">{{ field.name }}</th>
+            {% endfor %}
+        </tr>
+        {% for item in items %}
+            <tr style="font-size: 0.7em;">
+                {% for field in fields %}
+                    {% if field.name == 'image' %}
+                        <td class="align-middle">
+                            <img style="width: 40px; height: 40px;" src="{{ item.image }}">
+                        </td>
+                    {% else %}
+                        <td class="align-middle">{{ item[field.name] }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td class="align-middle">
+                    <a href="#" class="badge badge-secondary p-1"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="/panel/{{category}}/delete/{{item.id}}" class="badge badge-danger p-1"><i class="fas fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
