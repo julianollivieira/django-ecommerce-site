@@ -11,4 +11,8 @@ Features to do list:
 - User can click on a product to view the product's details page
 - User can add products to their shopping cart
 - User can order all products in their shopping cart
-- User can login to the admin site, add products and view orders
+- User can login to the admin panel/site
+- Admin user can delete products/users
+- Admin user can update/edit products/users
+- Admin user can add products/users
+- Admin user can view all products/users
