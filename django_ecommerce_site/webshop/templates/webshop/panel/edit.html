@@ -1,14 +1,15 @@
 {% extends 'webshop/base.html' %}
 {% block content %}
     <div class="container w-50">
-        <form action="">
+        <form action="/panel/{{category}}/edit/{{id}}?confirm=true" method="POST">
+            {{ csrf_input }}
             {% for field in fields %}
                 <div class="form-group">
                     <label for="input-{{field.name}}">{{field.name}}</label>
                     {% if field.name == "description" %}
-                        <textarea class="form-control" id="input-{{field.name}}" cols="30" rows="5">{{item[field.name]}}</textarea>
+                        <textarea name="input-{{field.name}}" class="form-control" id="input-{{field.name}}" cols="30" rows="5">{{item[field.name]}}</textarea>
                     {% else %}
-                        <input id="input-{{field.name}}" value="{{item[field.name]}}" type="text" class="form-control" placeholder="{{field.name}}">
+                        <input name="input-{{field.name}}" id="input-{{field.name}}" value="{{item[field.name]}}" type="text" class="form-control" placeholder="{{field.name}}">
                     {% endif %}
                 </div>
             {% endfor %}

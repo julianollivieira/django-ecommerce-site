@@ -14,7 +14,6 @@ class Products:
         return Product.objects.filter(id=_id).delete()
     def getFirstWithId(self, _id):
         return Product.objects.filter(id=_id)[0]
-
 class Users:
     def getAll(self):
         return User.objects.all()
@@ -32,7 +31,7 @@ categories = {
     'users': Users(),
 }
 
-def overview(request, category):
+def overview(request, category): # View items
     search_query = request.GET.get("query", "")
     search_field = request.GET.get("field", "") 
     cat = categories[category]
@@ -46,15 +45,28 @@ def overview(request, category):
         'search_query': search_query,
         'search_field': search_field,
     })
-
-def delete(request, category, id):
+def delete(request, category, id): # Delete items
     categories[category].deleteWithId(id)
     return redirect('/panel/'+category)
+def edit(request, category, id): # Edit items
+    if(request.GET.get("confirm", "" == "true")):
 
-def edit(request, category, id):
+        record = categories[category].getFirstWithId(id)
+        form_values = {}
 
-    return render(request, 'webshop/panel/edit.html', {
-        'category': category,
-        'fields': categories[category].getFields(),
-        'item': categories[category].getFirstWithId(id)
-    })
+        for field in categories[category].getFields():
+            form_values[field.name] = request.POST.get("input-"+field.name, "")
+
+        for key in form_values:
+            setattr(record, key, form_values[key])
+
+        record.save()
+        return redirect("/panel/"+category)
+    else:
+        return render(request, 'webshop/panel/edit.html', {
+            'category': category,
+            'fields': categories[category].getFields(),
+            'item': categories[category].getFirstWithId(id),
+            'id': id,
+        })
+# def add(request, category):
