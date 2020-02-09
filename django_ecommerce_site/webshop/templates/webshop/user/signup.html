@@ -1,0 +1,91 @@
+{% extends 'webshop/base.html' %}
+{% block content %}
+  <div class="container">
+    <form class="" action="/api/signup/" method="post">
+      {{ csrf_input }}
+      <div class="row">
+        <div class="col-sm-6">
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="InputEmail">Email address</label>
+            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          
+          <!-- Password -->
+          <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input type="password" class="form-control" id="InputPassword" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Confirm password -->
+          <div class="form-group">
+            <label for="InputConfirmPassword">Confirm password</label>
+            <input type="pasword" class="form-control" id="InputConfirmPassword" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- First name -->
+          <div class="form-group">
+            <label for="InputFirstname">First name</label>
+            <input type="text" class="form-control" id="InputFirstname" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Last name -->
+          <div class="form-group">
+            <label for="InputLastname">Last name</label>
+            <input type="text" class="form-control" id="InputLastname" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          
+        </div>
+        <div class="col-sm-6">
+
+          <!-- Postal code -->
+          <div class="form-group">
+            <label for="InputPostalcode">Postal code</label>
+            <input type="text" class="form-control" id="InputPostalcode" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- House number or additions -->
+          <div class="form-group">
+            <label for="InputHousenumber">House number or additions</label>
+            <input type="text" class="form-control" id="InputHousenumber" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Street name -->
+          <div class="form-group">
+            <label for="InputStreetname">Street name</label>
+            <input type="text" class="form-control" id="InputStreetname" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- City name -->
+          <div class="form-group">
+            <label for="InputCityname">City name</label>
+            <input type="text" class="form-control" id="InputCityname" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- County -->
+          <div class="form-group">
+            <label for="InputCountry">Country</label>
+            <input type="text" class="form-control" id="InputCountry" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Phone number -->
+          <div class="form-group">
+            <label for="InputPhonenumber">Phone number</label>
+            <input type="text" class="form-control" id="InputPhonenumber" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Date of birth -->
+          <div class="form-group">
+            <label for="InputDateofbirth">Date of birth</label>
+            <input type="text" class="form-control" id="InputDateofbirth" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+
+          <!-- Sign up -->
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+      </div>
+    </form>
+    <p style="color: red;">{{ error }}</p>
+  </div>
+{% endblock %}

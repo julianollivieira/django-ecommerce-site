@@ -2,12 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ..models import Product, User
 
-# Login and register PAGE
 def login(request):
-    return render(request, 'webshop/login.html', {'error': request.GET.get('error')})
+    return render(request, 'webshop/user/login.html')
 
-def register(request):
-    return render(request, 'webshop/register.html', {'error': request.GET.get('error')})
+def signup(request):
+    return render(request, 'webshop/user/signup.html')
 
 
 # Logout and account PAGE

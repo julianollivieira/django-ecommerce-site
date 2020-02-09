@@ -7,10 +7,13 @@ from .controllers import user_controller as user
 urlpatterns = [
     path('', misc.home, name='webshop-home'),
 
+    # Panel
     path('panel/<str:category>', panel.overview, name='webshop-panel-overview'),
     path('panel/<str:category>/delete/<int:id>', panel.delete, name='webshop-panel-delete'),
-    path('panel/<str:category>/edit/<int:id>', panel.edit, name="webshop-panel-edit")
+    path('panel/<str:category>/edit/<int:id>', panel.edit, name="webshop-panel-edit"),
 
+    path('login/', user.login, name="webshop-user-login"),
+    path('signup/', user.signup, name="webshop-user-signup"),
 
     # path('product/<int:product_id>', misc.product, name='webshop-product'),
 
