@@ -25,8 +25,22 @@
               <p class="card-text">{{ product.description }}</p>
             </div>
             <div class="card-footer">
-              <p class="prijskaartje">{{ product.price}}.-</p>
-              <p class="oud_prijskaartje text-danger">{{ product.old_price}}.-</p>
+              <p class="prijskaartje">
+                {% if (product.price % 1) == 0 %}
+                  {{ ((product.price)|string )[:-3] }}.-
+                {% else %}
+                  {{ product.price }}
+                {% endif%}
+              </p>
+              <p class="oud_prijskaartje text-danger">
+                {% if product.old_price != 0.0 %}
+                  {% if (product.old_price % 1) == 0 %}
+                    {{ ((product.old_price)|string )[:-3] }}.-
+                  {% else %}
+                    {{ product.old_price }}
+                  {% endif%}
+                {% endif %}
+              </p>
               <a href="product/1/order" class="btn btn-primary">Bestel Nu</a>
             </div>
           </div>

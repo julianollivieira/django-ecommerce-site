@@ -3,7 +3,6 @@ from .controllers import misc_controller as misc
 from .controllers import panel_controller as panel
 from .controllers import user_controller as user
 
-
 urlpatterns = [
     path('', misc.home, name='webshop-home'),
 
@@ -14,6 +13,9 @@ urlpatterns = [
 
     path('login/', user.login, name="webshop-user-login"),
     path('signup/', user.signup, name="webshop-user-signup"),
+
+    path('product/<int:product_id>', misc.product, name="webshop-product"),
+    path('shopping-cart/', misc.shopping_cart, name="webshop-shopping_cart"),
 
     # path('product/<int:product_id>', misc.product, name='webshop-product'),
 
