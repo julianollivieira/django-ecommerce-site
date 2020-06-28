@@ -1,7 +1,7 @@
 {% extends 'webshop/base.html' %}
 {% block content %}
     <div class="container w-50">
-        <form action="/panel/{{category}}/edit/{{id}}?confirm=true" method="POST">
+        <form action="/panel/{{category}}/{{type}}/{{id}}?confirm=true" method="POST">
             {{ csrf_input }}
             {% for field in fields %}
                 <div class="form-group">

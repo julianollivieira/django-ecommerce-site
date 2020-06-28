@@ -49,7 +49,7 @@ def delete(request, category, id): # Delete items
     categories[category].deleteWithId(id)
     return redirect('/panel/'+category)
 def edit(request, category, id): # Edit items
-    if(request.GET.get("confirm", "" == "true")):
+    if(request.GET.get("confirm", "") == "true"):
 
         record = categories[category].getFirstWithId(id)
         form_values = {}
@@ -65,8 +65,21 @@ def edit(request, category, id): # Edit items
     else:
         return render(request, 'webshop/panel/edit.html', {
             'category': category,
+            'type': 'edit',
             'fields': categories[category].getFields(),
             'item': categories[category].getFirstWithId(id),
             'id': id,
         })
-# def add(request, category):
+def add(request, category, id):
+    if(request.GET.get("confirm", "") == "true"):
+    
+
+        return redirect("/panel/"+category)
+    else:
+        return render(request, 'webshop/panel/edit.html', {
+            'category': category,
+            'type': 'start',
+            'fields': categories[category].getFields(),
+            'item': categories[category].getFirstWithId(id),
+            'id': id,
+        })
